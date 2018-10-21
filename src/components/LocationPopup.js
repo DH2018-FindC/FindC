@@ -32,17 +32,19 @@ export default class LocationPopup extends Component {
 
     render() {
         let { point } = this.state;
-        return <div style={{ width: 340, height: 300, fontSize: 14, overflowY: 'auto' }}>
+        return <div style={{ width: 330, height: 400, fontSize: 14, overflowY: 'auto' }}>
             <p><strong>{point.name}</strong></p>
             <p><a href={`https://www.google.com/maps/?q=${point.lat},${point.lng}`} target="_blank">Open in Google Maps</a></p>
             <p>What did you visit for? Give it a thumbs up!</p>
             {Object.keys(point.services).map((d, i) => {
-                return <div key={this.state.pushKey + "" + i} style={{ verticalAlign: 'baseline' }}>
-                    {this.kv[d]}: {point.services[d]}
+                return <div key={this.state.pushKey + "" + i} style={{ verticalAlign: 'baseline', borderBottom: '1px solid black', width: '90%', padding: 3 }}>
+                    {this.kv[d]}: {point.services[d]}<span style={{ margin: 3 }}></span>
                     <Button style={{ padding: 0, minHeight: 0, minWidth: 40 }} onClick={() => { this.addCount(d, true) }}><span role="img" aria-label="thumbs up">👍</span></Button>
                     <Button style={{ padding: 0, minHeight: 0, minWidth: 40 }} onClick={() => { this.addCount(d, false) }}><span role="img" aria-label="thumbs down">👎</span></Button>
                 </div>
             })}
+            <div style={{ marginTop: 10 }}></div>
+            <Button color="primary">Petition</Button> <Button color="primary">Suggest</Button> <Button color="secondary">Report</Button>
         </div>
     }
 }
