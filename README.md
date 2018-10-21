@@ -46,7 +46,9 @@ Along with this, some small town shops who do this may not want to give out the 
 # Technical Description
 Our application is implemented in **React** on the front end, using **React Router** for routing. We use this library for making a responsive web application
 
-We connect and store data points to Google's **Firebase** to ensure quick connection speed to insert pieces of data. 
+We connect and store data points to Google's **Firebase** to ensure quick connection speed to insert pieces of data.
+
+We connect to **Google Cloud Geocoding API** to get quick address latitude and longitude locations
 
 We use **LeafletJS**, which uses OpenStreetMap under the hood, for customizability and speed. OpenStreetMap is used online on a lot of websites, so the images may be stored in the cache to make the application load faster.
 
