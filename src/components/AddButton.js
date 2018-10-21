@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
-
+/**
+ * AddButton is the bottom that appears at the bottom right of the Main page
+ * @class
+ */
 export default class AddButton extends Component {
     render() {
         return <div style={{

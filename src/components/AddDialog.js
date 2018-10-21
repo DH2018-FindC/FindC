@@ -16,10 +16,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const API_KEY = 'AIzaSyA-u4mGseXsGu1mLytcpR3skLsn24vwH3Y';
+// pls dont steal
+const ak = 'AIzaSyA-u4mGseXsGu1mLytcpR3skLsn24vwH3Y';
 const ENDPOINT_LINK = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-//https://maps.googleapis.com/maps/api/geocode/json?address=University%20of%20Washington&key=AIzaSyA-u4mGseXsGu1mLytcpR3skLsn24vwH3Y
-// https://maps.googleapis.com/maps/api/geocode/json?address=University%20of%20Washington&key=AIzaSyA-u4mGseXsGu1mLytcpR3skLsn24vwH3Y
+
+/**
+ * AddDialog is the dialog window for adding information to firebase
+ * @class
+ */
 export default class AddDialog extends Component {
     constructor(props) {
         super(props);
@@ -49,13 +53,17 @@ export default class AddDialog extends Component {
         ]
     }
 
+    /**
+     * Submit data to firebase based on state. 
+     * Fetch latitude and longitude of address via Google Cloud Platform and store that into firebase.
+     */
     submitToFirebase = () => {
         let services = this.state.services;
         Object.keys(services).forEach(service => {
             services[service] = services[service] ? 1 : 0
         });
 
-        fetch(`${ENDPOINT_LINK}${this.state.address}&key=${API_KEY}`)
+        fetch(`${ENDPOINT_LINK}${this.state.address}&key=${ak}`)
             .then(d => {
                 return d.json();
             })
@@ -72,6 +80,9 @@ export default class AddDialog extends Component {
             });
     }
 
+    /**
+     * Client side security checking-- there is server side as well in Firebase rules
+     */
     checkError = () => {
         if (this.state.address === "") {
             this.setState({ error: "address" });
@@ -84,6 +95,9 @@ export default class AddDialog extends Component {
         return true;
     }
 
+    /**
+     * Clear state data
+     */
     clearData = () => {
         this.setState({
             name: '',
@@ -93,6 +107,10 @@ export default class AddDialog extends Component {
         })
     }
 
+    /**
+     * Set open or coordinates if changed
+     * @param {*} nextProps 
+     */
     componentWillReceiveProps(nextProps) {
         this.setState({
             open: nextProps.open,
@@ -100,12 +118,18 @@ export default class AddDialog extends Component {
         })
     }
 
+    /**
+     * Handle text input change
+     */
     handleChange = (variable) => event => {
         this.setState({
             [variable]: event.target.value
         })
     }
 
+    /**
+     * Handle checkbox changed
+     */
     handleChecked = (variable) => event => {
         let temp = this.state.services;
         temp[variable] = true;
@@ -114,9 +138,12 @@ export default class AddDialog extends Component {
         });
     }
 
+    /**
+     * Get the reverse geolocation to get address from current lat/lng
+     */
     getReverseGeoLocation = () => {
         this.setState({ reverseLoading: true });
-        let link = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.coords.latitude},${this.state.coords.longitude}&location_type=ROOFTOP&result_type=street_address&key=${API_KEY}`
+        let link = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.coords.latitude},${this.state.coords.longitude}&location_type=ROOFTOP&result_type=street_address&key=${ak}`
         fetch(link).then(d => {
             return d.json();
         }).then(d => {
