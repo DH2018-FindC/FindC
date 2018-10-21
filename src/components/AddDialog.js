@@ -128,7 +128,6 @@ export default class AddDialog extends Component {
     }
 
     render() {
-        console.log(this.state);
         return <div>
             <Dialog
                 open={this.state.open}

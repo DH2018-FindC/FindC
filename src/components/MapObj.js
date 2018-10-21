@@ -16,7 +16,8 @@ export default class MapObj extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            coords: this.props.coords
+            coords: this.props.coords,
+            data: this.props.data
         }
 
 
@@ -24,8 +25,8 @@ export default class MapObj extends Component {
 
     }
 
-    componentWillReceiveProps({ coords }) {
-        this.setState({ coords });
+    componentWillReceiveProps({ coords, data }) {
+        this.setState({ coords, data });
     }
 
 
@@ -41,8 +42,8 @@ export default class MapObj extends Component {
                     {/* <CircleMarker center={arr}>
                         <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
                     </CircleMarker> */}
-                    <Marker position={arr}>
-                        <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+                    <Marker position={arr} color="red">
+                        {/* <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup> */}
                     </Marker>
                 </Map>
             </div>
