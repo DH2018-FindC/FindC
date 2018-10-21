@@ -1,1 +1,0 @@
-{"version":3,"sources":["C:/Files/Misc/findc/src/components/C:/Files/Misc/findc/src/components/MapObj.css"],"names":[],"mappings":"AAAA,mBACI,aAAc,AACd,YAAa,AACb,SAAY,AACZ,SAAa,CAChB","file":"1.13d7f43c.chunk.css","sourcesContent":[".leaflet-container {\r\n    height: 100vh;\r\n    width: 100vw;\r\n    margin: 0px;\r\n    padding: 0px;\r\n}\r\n\r\n"]}
