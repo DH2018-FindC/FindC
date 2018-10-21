@@ -71,7 +71,12 @@ export default class Headbar extends Component {
                         <List >
                             <ListItem>
                                 <ListItemText>
-                                    <Link to="" style={{ textDecoration: 'none', color: 'black' }} >Main</Link>
+                                    <Link to="" style={{ textDecoration: 'none', color: 'black' }} >Home</Link>
+                                </ListItemText>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemText>
+                                    <Link to="/map" style={{ textDecoration: 'none', color: 'black' }} >Map</Link>
                                 </ListItemText>
                             </ListItem>
                             <ListItem>

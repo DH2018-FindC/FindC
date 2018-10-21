@@ -32,13 +32,13 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-
                 <Router>
                     <div>
                         <Headbar />
                         <Switch>
                             <Route exact path="/about" render={() => <div>About page</div>} />
-                            <Route render={() => <Main coords={this.state.coords} />} />
+                            <Route exact path="/map" render={() => <Main coords={this.state.coords} />} />
+                            <Route render={() => <div>Home page</div>} />
                         </Switch>
                     </div>
                 </Router>
