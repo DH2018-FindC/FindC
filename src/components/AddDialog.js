@@ -13,11 +13,12 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 const API_KEY = 'AIzaSyA-u4mGseXsGu1mLytcpR3skLsn24vwH3Y';
 const ENDPOINT_LINK = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-
+//https://maps.googleapis.com/maps/api/geocode/json?address=University%20of%20Washington&key=AIzaSyA-u4mGseXsGu1mLytcpR3skLsn24vwH3Y
 // https://maps.googleapis.com/maps/api/geocode/json?address=University%20of%20Washington&key=AIzaSyA-u4mGseXsGu1mLytcpR3skLsn24vwH3Y
 export default class AddDialog extends Component {
     constructor(props) {
@@ -27,7 +28,15 @@ export default class AddDialog extends Component {
             name: '',
             address: '',
             reverseLoading: false,
-            services: {}
+            services: {
+                F_condoms: false,
+                F_bcpills: false,
+                F_iud: false,
+                D_condoms: false,
+                D_bcpills: false,
+                D_iud: false
+            },
+            error: ''
         };
 
         this.servicesList = [
@@ -38,6 +47,41 @@ export default class AddDialog extends Component {
             { id: 'D_bcpills', title: 'Discounted Birth Control Pills' },
             { id: 'D_iud', title: 'Discounted IUDs' }
         ]
+    }
+
+    submitToFirebase = () => {
+        let services = this.state.services;
+        Object.keys(services).forEach(service => {
+            services[service] = services[service] ? 1 : 0
+        });
+
+        fetch(`${ENDPOINT_LINK}${this.state.address}&key=${API_KEY}`)
+            .then(d => {
+                return d.json();
+            })
+            .then(d => {
+                let loc = d.results[0].geometry.location;
+                firebase.database().ref('Data').push({
+                    name: this.state.name,
+                    address: this.state.address,
+                    services,
+                    lat: loc.lat,
+                    lng: loc.lng
+                });
+                this.clearData();
+            });
+    }
+
+    checkError = () => {
+        if (this.state.address === "") {
+            this.setState({ error: "address" });
+            return false;
+        }
+        if (this.state.name === "") {
+            this.setState({ error: "name" });
+            return false;
+        }
+        return true;
     }
 
     clearData = () => {
@@ -84,6 +128,7 @@ export default class AddDialog extends Component {
     }
 
     render() {
+        console.log(this.state);
         return <div>
             <Dialog
                 open={this.state.open}
@@ -97,6 +142,7 @@ export default class AddDialog extends Component {
                         Please enter information about a location!
                     </DialogContentText>
                     <TextField
+                        error={this.state.error === "name"}
                         autoFocus
                         margin="dense"
                         id="name"
@@ -105,7 +151,7 @@ export default class AddDialog extends Component {
                         onChange={this.handleChange('name')}
                     />
                     <TextField
-                        autoFocus
+                        error={this.state.error === "address"}
                         margin="dense"
                         id="address"
                         label="Address"
@@ -124,7 +170,7 @@ export default class AddDialog extends Component {
                     <FormGroup>
                         {this.servicesList.map((d, i) => {
                             return <FormControlLabel key={'check' + i} control={
-                                <Checkbox checked={this.state.services[d.id]} onChange={this.handleChange(d.id)} value={d.id} />
+                                <Checkbox checked={this.state.services[d.id]} onChange={this.handleChecked(d.id)} value={d.id} />
                             }
                                 label={d.title} />
                         })}
@@ -139,8 +185,10 @@ export default class AddDialog extends Component {
                         Cancel
                     </Button>
                     <Button onClick={() => {
-                        this.clearData();
-                        this.props.setAddNewModalState(false);
+                        if (this.checkError()) {
+                            this.submitToFirebase();
+                            this.props.setAddNewModalState(false);
+                        }
                     }} color="primary">
                         Submit
                     </Button>
