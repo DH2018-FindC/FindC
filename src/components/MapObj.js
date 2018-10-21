@@ -5,14 +5,18 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import LocationPopup from './LocationPopup';
 
+// Reset leaflet defaults
 delete L.Icon.Default.prototype._getIconUrl;
-
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
     iconUrl: require('leaflet/dist/images/marker-icon.png'),
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
+/**
+ * MapObj is the leaflet map
+ * @class
+ */
 export default class MapObj extends Component {
     constructor(props) {
         super(props);
@@ -21,16 +25,18 @@ export default class MapObj extends Component {
             data: this.props.data,
             centered: [],
         }
-
-
-        this.position = [47.6555, -122.315];
-
     }
 
+    /**
+     * on receiving props, the map updates coordinates and data
+     */
     componentWillReceiveProps({ coords, data }) {
         this.setState({ coords, data });
     }
 
+    /**
+     * Set the centered position when clicked on
+     */
     setCentered = (lat, lng) => {
         this.setState({ centered: [lat + 0.0025, lng] });
     }

@@ -3,6 +3,10 @@ import Button from '@material-ui/core/Button';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
+/**
+ * LocationPopup is the popup for a single circle when clicked on
+ * @class
+ */
 export default class LocationPopup extends Component {
     constructor(props) {
         super(props);
@@ -21,11 +25,20 @@ export default class LocationPopup extends Component {
         }
     }
 
+    /**
+     * on component receiving props, set states
+     * @param {*} param destructured parameter for point and pushKey
+     */
     componentWillReceiveProps({ point, pushKey }) {
         this.setState({ point, pushKey });
     }
 
     // if addOrSub true, it adds, otherwise subs
+    /**
+     * addCount will add a count to the specific discounted/free item
+     * @param {string} key key of item to add or subtract
+     * @param {boolean} addOrSub if true, it'll add 1, if false it'll subtract 1
+     */
     addCount = (key, addOrSub) => {
         firebase.database().ref(`Data/${this.state.pushKey}/services/${key}`).set(this.state.point.services[key] + (addOrSub ? 1 : -1));
     }

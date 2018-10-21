@@ -16,6 +16,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
 
+/**
+ * Headbar is the header bar of the application
+ * @class
+ */
 export default class Headbar extends Component {
     constructor(props) {
         super(props);
@@ -24,6 +28,10 @@ export default class Headbar extends Component {
         }
     }
 
+    /** 
+     * Toggle drawer false or true
+     * @param drawerState false or true for closed or open
+     */
     toggleDrawer = (drawerState) => {
         this.setState({ open: drawerState });
     }
