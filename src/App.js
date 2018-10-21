@@ -24,12 +24,15 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Headbar />
+
                 <Router>
-                    <Switch>
-                        <Route exact path="/about" render={() => <div>About page</div>} />
-                        <Route render={() => <Main />} />
-                    </Switch>
+                    <div>
+                        <Headbar />
+                        <Switch>
+                            <Route exact path="/about" render={() => <div>About page</div>} />
+                            <Route render={() => <Main />} />
+                        </Switch>
+                    </div>
                 </Router>
             </div>
         );

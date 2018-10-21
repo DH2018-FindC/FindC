@@ -13,6 +13,7 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
+import { Link } from 'react-router-dom';
 
 export default class Headbar extends Component {
     constructor(props) {
@@ -34,7 +35,9 @@ export default class Headbar extends Component {
                         width: '100%'
                     }}>
                         <Typography variant="h6" color="inherit">
-                            Photos
+                            <Link to="" style={{ textDecoration: 'none', color: 'white' }}>
+                                FindC
+                            </Link>
                         </Typography>
                     </div>
                     <IconButton color="inherit" aria-label="Menu" onClick={() => {
@@ -49,21 +52,23 @@ export default class Headbar extends Component {
                 open={this.state.open}
                 onClose={() => this.toggleDrawer(false)}
                 onOpen={() => this.toggleDrawer(true)}
-                style={{
-                    width: 250
-                }}
+
             >
                 <div
+                    style={{
+                        width: 250
+                    }}
                     tabIndex={0}
                     role="button"
                     onClick={() => this.toggleDrawer(false)}
                     onKeyDown={() => this.toggleDrawer(false)}
                 >
                     <div>
-                        <List>
-                            <ListItem>test</ListItem>
+                        <List >
+                            <ListItem><Link to="" style={{ textDecoration: 'none', color: 'black' }} >Main</Link></ListItem>
+                            <ListItem><Link to="/about" style={{ textDecoration: 'none', color: 'black' }}>About</Link></ListItem>
                         </List>
-                        <Divider />
+                        {/* <Divider /> */}
                     </div>
                 </div>
             </SwipeableDrawer>
