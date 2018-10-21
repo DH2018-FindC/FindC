@@ -2,6 +2,7 @@
     "name": "findc",
     "version": "0.1.0",
     "private": true,
+    "homepage": "https://dh2018-findc.github.io/FindC",
     "dependencies": {
         "@material-ui/core": "^3.2.2",
         "@material-ui/icons": "^3.0.1",
