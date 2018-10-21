@@ -18,7 +18,8 @@ export default class MapObj extends Component {
         super(props);
         this.state = {
             coords: this.props.coords,
-            data: this.props.data
+            data: this.props.data,
+            centered: [],
         }
 
 
@@ -30,10 +31,17 @@ export default class MapObj extends Component {
         this.setState({ coords, data });
     }
 
+    setCentered = (lat, lng) => {
+        this.setState({ centered: [lat + 0.0025, lng] });
+    }
+
 
     render() {
-        let arr = [this.state.coords && this.state.coords.latitude ? this.state.coords.latitude : 0,
+        let arr = this.state.centered.length > 0 ? this.state.centered : [this.state.coords && this.state.coords.latitude ? this.state.coords.latitude : 0,
         this.state.coords && this.state.coords.longitude ? this.state.coords.longitude : 0];
+
+        let home = [this.state.coords && this.state.coords.latitude ? this.state.coords.latitude : 0,
+        this.state.coords && this.state.coords.longitude ? this.state.coords.longitude : 0]
 
         let markerList = Object.keys(this.state.data).map((d, i) => {
             let point = this.state.data[d];
@@ -44,6 +52,7 @@ export default class MapObj extends Component {
                 color={'#000000'}
                 fillColor={'#ff0000'}
                 fillOpacity={'0.75'}
+                onClick={() => { this.setCentered(point.lat, point.lng) }}
             >
                 <Popup>
                     <LocationPopup point={point} pushKey={d} />
@@ -60,7 +69,7 @@ export default class MapObj extends Component {
                     {/* <CircleMarker center={arr}>
                         <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
                     </CircleMarker> */}
-                    <Marker position={arr} color="red">
+                    <Marker position={home} color="red">
                         {/* <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup> */}
                     </Marker>
                     <div>

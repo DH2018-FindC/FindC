@@ -32,7 +32,7 @@ export default class LocationPopup extends Component {
 
     render() {
         let { point } = this.state;
-        return <div style={{ width: 330, height: 400, fontSize: 14, overflowY: 'auto' }}>
+        return <div style={{ width: 330, height: 360, fontSize: 14, overflowY: 'auto' }}>
             <p><strong>{point.name}</strong></p>
             <p><a href={`https://www.google.com/maps/?q=${point.lat},${point.lng}`} target="_blank">Open in Google Maps</a></p>
             <p>What did you visit for? Give it a thumbs up!</p>
