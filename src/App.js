@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import Headbar from './components/Headbar';
+import Home from './components/Home';
 
 
 const Loading = () => <div></div>;
@@ -38,7 +39,7 @@ class App extends Component {
                         <Switch>
                             <Route exact path="/about" render={() => <div>About page</div>} />
                             <Route exact path="/map" render={() => <Main coords={this.state.coords} />} />
-                            <Route render={() => <div>Home page</div>} />
+                            <Route render={() => <Home />} />
                         </Switch>
                     </div>
                 </Router>
