@@ -16,6 +16,10 @@ const Home = Loadable({
     loader: () => import('./components/Home'),
     loading: Loading,
 })
+const About = Loadable({
+    loader: () => import('./containers/About'),
+    loading: Loading,
+})
 
 /**
  * App is the main class where the app gets loaded
@@ -52,7 +56,7 @@ class App extends Component {
                     <div>
                         <Headbar />
                         <Switch>
-                            <Route exact path="/about" render={() => <div>About page</div>} />
+                            <Route exact path="/about" render={() => <About />} />
                             <Route exact path="/map" render={() => <Main coords={this.state.coords} data={this.state.data} />} />
                             <Route render={() => <Home />} />
                         </Switch>

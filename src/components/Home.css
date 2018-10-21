@@ -5,8 +5,9 @@
 }
 .button{
     position: fixed;
-    margin: auto;
     top: 70vh;
+    width: 180px;
+    left: calc( 50vw - 90px ) ;
 }
 .logo-clear{
     position: fixed;
