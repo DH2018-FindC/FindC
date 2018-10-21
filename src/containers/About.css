@@ -1,5 +1,8 @@
-.body{
-    background-color: white;
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
+body{
+    background-color: #151515;
+    overflow-y: scroll;
+
 }
 .button{
     position: fixed;
@@ -36,17 +39,29 @@
     box-sizing: border-box;
     height: 100vh;
     display: grid;
-    grid-auto-columns: 1fr;
+    grid-template-columns: repeat(1, 1fr);
     column-gap: 20px;
 }
 .intro{
-    grid-column: 1/4;
-    height: 40vh;
-    border: 1px solid black;
+    margin-top: 5vh;
+    font-size: 40px;    
+    font-weight: bold;
+    color: white;
 }
 .section{
-    height: 40vh;
-    border: 1px solid black;
+    font-size: 18px;
+    color: white;
+    box-sizing: border-box;
+    padding: 15px;
+    height: auto;
+    font-family: 'Montserrat';
+}
+.section span{
+    font-family: initial;
+    color: #A27DFF;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
 }
 @media (min-width: 768px) {
     .container-about {
@@ -54,7 +69,12 @@
     }
 }
 @media (min-width: 992px) {
+    .intro{
+        font-size: 100px;    
+        grid-column: 1/4;
+    }
     .container-about {
+        grid-template-columns: repeat(3, 1fr);
         width: 970px;
     }
 }
