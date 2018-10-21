@@ -3,6 +3,7 @@ import './App.css';
 import firebase from 'firebase/app';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
+import Headbar from './components/Headbar';
 
 
 const Loading = () => <div></div>;
@@ -23,6 +24,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <Headbar />
                 <Router>
                     <Switch>
                         <Route exact path="/about" render={() => <div>About page</div>} />
