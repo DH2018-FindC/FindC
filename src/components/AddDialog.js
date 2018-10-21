@@ -38,7 +38,8 @@ export default class AddDialog extends Component {
                 F_iud: false,
                 D_condoms: false,
                 D_bcpills: false,
-                D_iud: false
+                D_iud: false,
+                D_morningAfter: false
             },
             error: ''
         };
@@ -49,7 +50,8 @@ export default class AddDialog extends Component {
             { id: 'F_iud', title: 'Free IUDs' },
             { id: 'D_condoms', title: 'Discounted Condoms' },
             { id: 'D_bcpills', title: 'Discounted Birth Control Pills' },
-            { id: 'D_iud', title: 'Discounted IUDs' }
+            { id: 'D_iud', title: 'Discounted IUDs' },
+            { id: 'D_morningAfter', title: 'Discounted Morning After Pills' }
         ]
     }
 
