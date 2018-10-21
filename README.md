@@ -1,13 +1,13 @@
 # About
 
 ## What is the problem?
-For our project, we chose to explore access to free or discounted contraceptives is not always easy to find. Some people seeking this information may just not live in a place where that information is accessible to them through word of mouth.
+For our project, we chose to explore access to free or discounted contraceptives, which are not always easy to find. Some people seeking this information may just not live in a place where that information is accessible to them through word of mouth.
 
 ## Why is it a problem?
 According to the Johns Hopkins Bloomberg School of Public Health, contraceptive usage likely prevents over 272,000 maternal deaths a year. ([source](https://www.jhsph.edu/news/news-releases/2012/ahmed-contraception.html)). Contraceptive usage has been significantly linked to better quality of life for women ([source](https://www.plannedparenthood.org/about-us/newsroom/press-releases/new-cdc-studies-show-access-birth-control-critical-women)). Along with that, it advances the economy for everyone ([source](https://www.plannedparenthoodaction.org/fight-for-birth-control/facts/4-reasons-why-birth-control-badass)).
 
 ## Why did you choose to address this issue?
-We have personal connections to people who would have loved an accessible application like this. William has a connection that comes from a lower income town where the teen pregnancy rates were high, and that was partially due to non-access to contraception. Knowledge of programs like [Take Charge](https://www.hca.wa.gov/health-care-services-supports/apple-health-medicaid-coverage/take-charge-family-planning-non-medicaid) exist, but many just don’t know it exists. Our app aims to fix this issue of accessibility for various aspects.
+We have personal connections to people who would have loved an accessible application like this. William has a connection that comes from a lower income town where the teen pregnancy rates were high, and that was partially due to non-access to contraception. Programs like [Take Charge](https://www.hca.wa.gov/health-care-services-supports/apple-health-medicaid-coverage/take-charge-family-planning-non-medicaid) exist, but many just don’t know it exists. Our app aims to fix this issue of accessibility for various aspects.
 
 ## What has been done to fix this accessibility?
 Aside from word of mouth or advocacy from Planned Parenthood, we haven’t found much when it comes to finding free or cheap forms of contraceptives. All solutions that we found were either [poorly implemented, insecure, non-inclusive, and unaccessible](http://www.condomfinder.org/find.php) or [localized to only a certain area](https://www.kingcounty.gov/depts/health/locations/family-planning/birth-control.aspx). The information is just all over the place, or are on slow, bulky websites that won’t load quickly on lower end mobile devices.
@@ -61,6 +61,7 @@ This application is far from done. There are many features we have yet to implem
 * Implement more filtering functions in the search menu
 * Fix UI inconsistencies
 * Reduce duplicated code
+* Implement more features for accessible contraceptives
 
 # How to run
 
