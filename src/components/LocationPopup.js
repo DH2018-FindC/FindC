@@ -21,7 +21,8 @@ export default class LocationPopup extends Component {
             F_iud: 'Free IUDs',
             D_condoms: 'Discounted condoms',
             D_bcpills: 'Discounted Birth Control Pills',
-            D_iud: 'Discounted IUDs'
+            D_iud: 'Discounted IUDs',
+            D_morningAfter: 'Discounted Morning After Pills'
         }
     }
 
