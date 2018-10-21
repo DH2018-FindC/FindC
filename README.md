@@ -52,7 +52,7 @@ We use **LeafletJS**, which uses OpenStreetMap under the hood, for customizabili
 
 We use **MaterialUI** for ease of programming and also to provide users a more familiar application interface. 
 
-# Persistent Problems, Future Plans
+# Future Plans
 
 This application is far from done. There are many features we have yet to implement to truly make this into an accessible tool for all. We have ethical concerns to think about that we had previously mentioned as well.
 
