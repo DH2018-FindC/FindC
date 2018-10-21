@@ -38,7 +38,7 @@ class App extends Component {
                         <Headbar />
                         <Switch>
                             <Route exact path="/about" render={() => <div>About page</div>} />
-                            <Route render={() => <Main location={this.state.coords} />} />
+                            <Route render={() => <Main coords={this.state.coords} />} />
                         </Switch>
                     </div>
                 </Router>
