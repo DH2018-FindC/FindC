@@ -13,6 +13,7 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
 
 export default class Headbar extends Component {
@@ -29,7 +30,9 @@ export default class Headbar extends Component {
 
     render() {
         return <div>
-            <AppBar position="static">
+            <AppBar position="static" style={{
+                backgroundColor: '#421dac'
+            }}>
                 <Toolbar>
                     <div style={{
                         width: '100%'
@@ -65,8 +68,16 @@ export default class Headbar extends Component {
                 >
                     <div>
                         <List >
-                            <ListItem><Link to="" style={{ textDecoration: 'none', color: 'black' }} >Main</Link></ListItem>
-                            <ListItem><Link to="/about" style={{ textDecoration: 'none', color: 'black' }}>About</Link></ListItem>
+                            <ListItem>
+                                <ListItemText>
+                                    <Link to="" style={{ textDecoration: 'none', color: 'black' }} >Main</Link>
+                                </ListItemText>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemText>
+                                    <Link to="/about" style={{ textDecoration: 'none', color: 'black' }}>About</Link>
+                                </ListItemText>
+                            </ListItem>
                         </List>
                         {/* <Divider /> */}
                     </div>
