@@ -12,6 +12,9 @@ export default class Home extends Component {
     render() {
         return (
             <div className={'container'}>
+                <div class="logo-clear">
+                </div>
+                <div class="name">FindC</div>
                 <Link to="/map">
                 <Button variant="extendedFab" className={'button'} style={{backgroundColor: '#ff7777', color: 'white'}} >
                     <NavigationIcon/>

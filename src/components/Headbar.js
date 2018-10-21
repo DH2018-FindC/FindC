@@ -38,7 +38,7 @@ export default class Headbar extends Component {
                     <div style={{
                         width: '100%'
                     }}>
-                        <Typography variant="h6" color="inherit">
+                        <Typography variant="h6" color="inherit" style={{textAlign: 'left'}}>
                             <Link to="" style={{ textDecoration: 'none', color: 'white' }}>
                                 FindC
                             </Link>
