@@ -9,12 +9,13 @@ export default class Main extends Component {
         super(props);
         this.state = {
             coords: this.props.coords,
+            data: this.props.data,
             addNewModalOpen: false
         }
     }
 
-    componentWillReceiveProps({ coords }) {
-        this.setState({ coords })
+    componentWillReceiveProps({ coords, data }) {
+        this.setState({ coords, data })
     }
 
     setAddNewModalState = (addNewModalOpen) => {
@@ -27,7 +28,7 @@ export default class Main extends Component {
             height: '100vh',
             overflow: 'hidden'
         }}>
-            <MapObj coords={this.state.coords} style={{ width: '100vw', height: '100vh' }} />
+            <MapObj coords={this.state.coords} style={{ width: '100vw', height: '100vh' }} data={this.state.data} />
             <AddButton setAddNewModalState={this.setAddNewModalState} />
             <AddDialog open={this.state.addNewModalOpen} coords={this.state.coords} setAddNewModalState={this.setAddNewModalState} />
         </div>
