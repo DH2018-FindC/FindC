@@ -4,7 +4,7 @@
 For our project, we chose to explore access to free or discounted contraceptives is not always easy to find. Some people seeking this information may just not live in a place where that information is accessible to them through word of mouth.
 
 ## Why is it a problem?
-According to the Johns Hopkins Bloomberg School of Public Health, contraceptive usage likely prevents over 272,000 maternal deaths a year. [source](https://www.jhsph.edu/news/news-releases/2012/ahmed-contraception.html). Contraceptive usage has been significantly linked to better quality of life for women [source](https://www.plannedparenthood.org/about-us/newsroom/press-releases/new-cdc-studies-show-access-birth-control-critical-women). Along with that, it advances the economy for everyone [source](https://www.plannedparenthoodaction.org/fight-for-birth-control/facts/4-reasons-why-birth-control-badass).
+According to the Johns Hopkins Bloomberg School of Public Health, contraceptive usage likely prevents over 272,000 maternal deaths a year. ([source](https://www.jhsph.edu/news/news-releases/2012/ahmed-contraception.html)). Contraceptive usage has been significantly linked to better quality of life for women ([source](https://www.plannedparenthood.org/about-us/newsroom/press-releases/new-cdc-studies-show-access-birth-control-critical-women)). Along with that, it advances the economy for everyone ([source](https://www.plannedparenthoodaction.org/fight-for-birth-control/facts/4-reasons-why-birth-control-badass)).
 
 ## Why did you choose to address this issue?
 We have personal connections to people who would have loved an accessible application like this. William has a connection that comes from a lower income town where the teen pregnancy rates were high, and that was partially due to non-access to contraception. Knowledge of programs like [Take Charge](https://www.hca.wa.gov/health-care-services-supports/apple-health-medicaid-coverage/take-charge-family-planning-non-medicaid) exist, but many just don’t know it exists. Our app aims to fix this issue of accessibility for various aspects.
@@ -22,6 +22,7 @@ Our application has many features that set it apart from other applications:
 * Easy to use filtering system for information
 * Socially mediated using a system similar to Waze, where people self report. They can upvote and downvote
 * Desktop and mobile friendly
+* Scalable
 
 # Stakeholders
 
@@ -45,16 +46,36 @@ Along with this, some small town shops who do this may not want to give out the 
 # Technical Description
 Our application is implemented in **React** on the front end, using **React Router** for routing. We use this library for making a responsive web application
 
-We connect and store data points to Google's **Firebase** to ensure quick connections 
+We connect and store data points to Google's **Firebase** to ensure quick connection speed to insert pieces of data. 
 
-Persistent Problems, Future Plans
-User input once
+We use **LeafletJS**, which uses OpenStreetMap under the hood, for customizability and speed. OpenStreetMap is used online on a lot of websites, so the images may be stored in the cache to make the application load faster.
 
+We use **MaterialUI** for ease of programming and also to provide users a more familiar application interface. 
 
+# Persistent Problems, Future Plans
 
-Code Structure
-React App
-Leaflet
-Firebase
-MaterialUI
-No Map on Slow
+This application is far from done. There are many features we have yet to implement to truly make this into an accessible tool for all. We have ethical concerns to think about that we had previously mentioned as well.
+
+* Use Google Cloud Functions to do filtering, rather than client side
+* Hide the exposed API Key
+* Implement more filtering functions in the search menu
+* Fix UI inconsistencies
+* Reduce duplicated code
+
+# How to run
+
+## This app will be unable to be run after Dubhacks 2018
+
+This is because it uses API keys that are publically available. These keys will be shut down after Dubhacks 2018. Here are instructions on how to replace the API keys:
+
+1. In `src/index.js` you must replace the firebase config
+2. In `src/components/SearchDialog.js` and `src/components/AddDialog.js` you must replace the `ak` variable with a Google Cloud API Key that has access to the Geolocation API
+
+## Building and running and deploying
+
+1. Fork the repository
+2. `npm install`
+3. Replace the API keys and firebase config
+4. `npm run build`
+5. `npx gh-pages -d build`
+6. Now it will be available at `http://yourGHusername.github.io/FindC`
