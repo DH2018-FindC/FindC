@@ -17,8 +17,16 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            coords: {}
         }
+    }
+
+    componentWillMount() {
+        navigator.geolocation.getCurrentPosition(d => {
+            this.setState({
+                coords: d.coords
+            });
+        })
     }
 
     render() {
@@ -30,7 +38,7 @@ class App extends Component {
                         <Headbar />
                         <Switch>
                             <Route exact path="/about" render={() => <div>About page</div>} />
-                            <Route render={() => <Main />} />
+                            <Route render={() => <Main location={this.state.coords} />} />
                         </Switch>
                     </div>
                 </Router>
