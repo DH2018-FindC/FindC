@@ -27,7 +27,6 @@ export default class Home extends Component {
                 </div>
                 <div className={'section'}>
                     <div style={{fontSize:'60px'}}><VerifiedUserIcon fontSize="inherit"/></div>
-                    <br/>
                     <span>Why use condoms?</span>
                     <br/>
                     <br/>
