@@ -24,14 +24,13 @@ const ENDPOINT_LINK = 'https://maps.googleapis.com/maps/api/geocode/json?address
  * AddDialog is the dialog window for adding information to firebase
  * @class
  */
-export default class AddDialog extends Component {
+export default class SearchDialog extends Component {
     constructor(props) {
         super(props);
         this.state = {
             open: this.props.open,
-            name: '',
             address: '',
-            reverseLoading: false,
+            loading: false,
             services: {
                 F_condoms: false,
                 F_bcpills: false,
@@ -41,7 +40,8 @@ export default class AddDialog extends Component {
                 D_iud: false,
                 D_morningAfter: false
             },
-            error: ''
+            error: '',
+            coords: this.props.coords
         };
 
         this.servicesList = [
@@ -56,56 +56,43 @@ export default class AddDialog extends Component {
     }
 
     /**
-     * Submit data to firebase based on state. 
-     * Fetch latitude and longitude of address via Google Cloud Platform and store that into firebase.
+     * Clear state data
      */
-    submitToFirebase = () => {
-        let services = this.state.services;
-        Object.keys(services).forEach(service => {
-            services[service] = services[service] ? 1 : 0
-        });
+    clearData = () => {
+        this.setState({
+            address: '',
+            loading: false,
+            services: {}
+        })
+    }
 
+    submit = () => {
         fetch(`${ENDPOINT_LINK}${this.state.address}&key=${ak}`)
             .then(d => {
                 return d.json();
             })
             .then(d => {
                 let loc = d.results[0].geometry.location;
-                firebase.database().ref('Data').push({
-                    name: this.state.name,
-                    address: this.state.address,
-                    services,
-                    lat: loc.lat,
-                    lng: loc.lng
-                });
+                this.props.setNewCoords(loc.lat, loc.lng);
+                this.props.setFilter(this.state.services);
                 this.clearData();
             });
     }
 
-    /**
-     * Client side security checking-- there is server side as well in Firebase rules
-     */
-    checkError = () => {
-        if (this.state.address === "") {
-            this.setState({ error: "address" });
-            return false;
-        }
-        if (this.state.name === "") {
-            this.setState({ error: "name" });
-            return false;
-        }
-        return true;
-    }
 
     /**
-     * Clear state data
-     */
-    clearData = () => {
-        this.setState({
-            name: '',
-            address: '',
-            reverseLoading: false,
-            services: {}
+ * Get the reverse geolocation to get address from current lat/lng
+ */
+    getReverseGeoLocation = () => {
+        this.setState({ loading: true });
+        let link = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.coords.latitude},${this.state.coords.longitude}&location_type=ROOFTOP&result_type=street_address&key=${ak}`
+        fetch(link).then(d => {
+            return d.json();
+        }).then(d => {
+            this.setState({
+                address: d.results[0].formatted_address,
+                loading: false
+            });
         })
     }
 
@@ -140,44 +127,19 @@ export default class AddDialog extends Component {
         });
     }
 
-    /**
-     * Get the reverse geolocation to get address from current lat/lng
-     */
-    getReverseGeoLocation = () => {
-        this.setState({ reverseLoading: true });
-        let link = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.coords.latitude},${this.state.coords.longitude}&location_type=ROOFTOP&result_type=street_address&key=${ak}`
-        fetch(link).then(d => {
-            return d.json();
-        }).then(d => {
-            this.setState({
-                address: d.results[0].formatted_address,
-                reverseLoading: false
-            });
-        })
-    }
-
     render() {
         return <div>
             <Dialog
                 open={this.state.open}
-                onClose={() => { this.props.setAddNewModalState(false) }}
+                onClose={() => { this.props.setSearchModalState(false) }}
                 aria-labelledby="form-dialog-title"
                 scroll="paper"
             >
-                <DialogTitle id="form-dialog-title">Add new info</DialogTitle>
+                <DialogTitle id="form-dialog-title">Search or filter</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please enter information about a location!
+                        Please enter the address you would like to see.
                     </DialogContentText>
-                    <TextField
-                        error={this.state.error === "name"}
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Name"
-                        fullWidth
-                        onChange={this.handleChange('name')}
-                    />
                     <TextField
                         error={this.state.error === "address"}
                         margin="dense"
@@ -187,14 +149,13 @@ export default class AddDialog extends Component {
                         onChange={this.handleChange('address')}
                         value={this.state.address}
                     />
-
                     <Button onClick={() => {
                         // this.props.setAddNewModalState(false)
                         this.getReverseGeoLocation();
-                    }} color="primary" disabled={this.state.reverseLoading}>
+                    }} color="primary" disabled={this.state.loading}>
                         Use current location
-                    </Button>{this.state.reverseLoading && <CircularProgress />}
-                    <FormLabel component="legend">What kinds of services does this place provide?</FormLabel>
+                    </Button>{this.state.loading && <CircularProgress />}
+                    <FormLabel component="legend">What kinds of services are you looking for?</FormLabel>
                     <FormGroup>
                         {this.servicesList.map((d, i) => {
                             return <FormControlLabel key={'check' + i} control={
@@ -208,15 +169,13 @@ export default class AddDialog extends Component {
                 <DialogActions>
                     <Button onClick={() => {
                         this.clearData();
-                        this.props.setAddNewModalState(false);
+                        this.props.setSearchModalState(false);
                     }} color="primary">
                         Cancel
                     </Button>
                     <Button onClick={() => {
-                        if (this.checkError()) {
-                            this.submitToFirebase();
-                            this.props.setAddNewModalState(false);
-                        }
+                        this.submit();
+                        this.props.setSearchModalState(false);
                     }} color="primary">
                         Submit
                     </Button>

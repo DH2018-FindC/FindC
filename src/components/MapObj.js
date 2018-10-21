@@ -23,6 +23,7 @@ export default class MapObj extends Component {
         this.state = {
             coords: this.props.coords,
             data: this.props.data,
+            services: this.props.services,
             centered: [],
         }
     }
@@ -30,8 +31,8 @@ export default class MapObj extends Component {
     /**
      * on receiving props, the map updates coordinates and data
      */
-    componentWillReceiveProps({ coords, data }) {
-        this.setState({ coords, data });
+    componentWillReceiveProps({ coords, data, services }) {
+        this.setState({ coords, data, services });
     }
 
     /**
@@ -39,6 +40,17 @@ export default class MapObj extends Component {
      */
     setCentered = (lat, lng) => {
         this.setState({ centered: [lat + 0.0025, lng] });
+    }
+
+    containsServices = (point) => {
+        let returnBool = true;
+        Object.keys(this.state.services).forEach(d => {
+            console.log(this.state.services[d], point.services[d])
+            if (this.state.services[d] && point.services[d] <= 0) {
+                returnBool = false;
+            }
+        })
+        return returnBool;
     }
 
 
@@ -51,19 +63,23 @@ export default class MapObj extends Component {
 
         let markerList = Object.keys(this.state.data).map((d, i) => {
             let point = this.state.data[d];
-            return <CircleMarker key={'c' + i}
-                center={L.latLng(point.lat, point.lng)}
-                radius={8}
-                fill={true}
-                color={'#000000'}
-                fillColor={'#ff0000'}
-                fillOpacity={'0.75'}
-                onClick={() => { this.setCentered(point.lat, point.lng) }}
-            >
-                <Popup>
-                    <LocationPopup point={point} pushKey={d} />
-                </Popup>
-            </CircleMarker>
+            if (this.containsServices(point)) {
+                return <CircleMarker key={'c' + i}
+                    center={L.latLng(point.lat, point.lng)}
+                    radius={8}
+                    fill={true}
+                    color={'#000000'}
+                    fillColor={'#ff0000'}
+                    fillOpacity={'0.75'}
+                    onClick={() => { this.setCentered(point.lat, point.lng) }}
+                >
+                    <Popup>
+                        <LocationPopup point={point} pushKey={d} />
+                    </Popup>
+                </CircleMarker>
+            } else {
+                return null;
+            }
         });
 
         return (
