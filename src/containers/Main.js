@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Map from '../components/Map';
+import MapObj from '../components/MapObj';
 import './Main.css';
 
 export default class Main extends Component {
@@ -15,9 +15,11 @@ export default class Main extends Component {
     }
     render() {
         return <div className={`classname`} style={{
-
+            width: '100vw',
+            height: '100vh',
+            overflow: 'hidden'
         }}>
-            <Map coords={this.state.coords} />
+            <MapObj coords={this.state.coords} style={{ width: '100vw', height: '100vh' }} />
         </div>
     }
 }

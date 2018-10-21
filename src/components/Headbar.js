@@ -31,7 +31,8 @@ export default class Headbar extends Component {
     render() {
         return <div>
             <AppBar position="static" style={{
-                backgroundColor: '#421dac'
+                backgroundColor: '#421dac',
+                position: 'absolute', top: 0, left: 0
             }}>
                 <Toolbar>
                     <div style={{
