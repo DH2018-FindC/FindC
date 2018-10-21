@@ -4,17 +4,23 @@ import firebase from 'firebase/app';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import Headbar from './components/Headbar';
-import Home from './components/Home';
 import 'firebase/database';
 
-
+// Loadable for code splitting
 const Loading = () => <div></div>;
 const Main = Loadable({
     loader: () => import('./containers/Main'),
     loading: Loading,
 })
+const Home = Loadable({
+    loader: () => import('./components/Home'),
+    loading: Loading,
+})
 
-
+/**
+ * App is the main class where the app gets loaded
+ * @class
+ */
 class App extends Component {
     constructor(props) {
         super(props);
@@ -24,6 +30,9 @@ class App extends Component {
         }
     }
 
+    /**
+     * On component mount, request user location and grab data from firebase
+     */
     componentWillMount() {
         navigator.geolocation.getCurrentPosition(d => {
             this.setState({
