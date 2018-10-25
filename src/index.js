@@ -6,13 +6,13 @@ import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase/app';
 
 // import firebase
-let config = {
-    apiKey: "AIzaSyAZaMPQd-aOdFZjOCJpMS8U_bwqnMAC-gU",
-    authDomain: "findc-4a7e5.firebaseapp.com",
-    databaseURL: "https://findc-4a7e5.firebaseio.com",
-    projectId: "findc-4a7e5",
-    storageBucket: "findc-4a7e5.appspot.com",
-    messagingSenderId: "814470540647"
+var config = {
+    apiKey: "AIzaSyD8Anz76IHcyo-qjmQYvKTjlpsrsUrRC_Y",
+    authDomain: "findc-a96b0.firebaseapp.com",
+    databaseURL: "https://findc-a96b0.firebaseio.com",
+    projectId: "findc-a96b0",
+    storageBucket: "findc-a96b0.appspot.com",
+    messagingSenderId: "541313378309"
 };
 firebase.initializeApp(config);
 
