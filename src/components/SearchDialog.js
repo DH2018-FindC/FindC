@@ -17,8 +17,9 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 
 // pls dont steal
-const ak = 'AIzaSyA-u4mGseXsGu1mLytcpR3skLsn24vwH3Y';
-const ENDPOINT_LINK = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+// const ak = 'AIzaSyA-u4mGseXsGu1mLytcpR3skLsn24vwH3Y';
+// const ENDPOINT_LINK = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+
 
 /**
  * AddDialog is the dialog window for adding information to firebase
@@ -67,7 +68,7 @@ export default class SearchDialog extends Component {
     }
 
     submit = () => {
-        fetch(`${ENDPOINT_LINK}${this.state.address}&key=${ak}`)
+        fetch(`http://localhost:8080/?id=1&address=${this.state.address}`)
             .then(d => {
                 return d.json();
             })
@@ -85,15 +86,24 @@ export default class SearchDialog extends Component {
  */
     getReverseGeoLocation = () => {
         this.setState({ loading: true });
-        let link = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.coords.latitude},${this.state.coords.longitude}&location_type=ROOFTOP&result_type=street_address&key=${ak}`
-        fetch(link).then(d => {
+        // let link = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.coords.latitude},${this.state.coords.longitude}&location_type=ROOFTOP&result_type=street_address&key=${ak}`
+        // fetch(link).then(d => {
+        //     return d.json();
+        // }).then(d => {
+        //     this.setState({
+        //         address: d.results[0].formatted_address,
+        //         loading: false
+        //     });
+        // })
+        let link = `https://localhost:8080/?id=2&param=latlng%3D${this.state.coords.latitude},${this.state.coords.longitude}%26location_type%3DROOFTOP%26result_type=%3Dstreet_address`;
+        fetch( link ).then( d => {
             return d.json();
-        }).then(d => {
-            this.setState({
-                address: d.results[0].formatted_address,
+        } ).then( d => {
+            this.setState( {
+                address: d.results[ 0 ].formatted_address,
                 loading: false
-            });
-        })
+            } );
+        } )
     }
 
     /**

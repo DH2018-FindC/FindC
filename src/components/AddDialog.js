@@ -16,10 +16,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-// pls dont steal
-const ak = 'AIzaSyA-u4mGseXsGu1mLytcpR3skLsn24vwH3Y';
-const ENDPOINT_LINK = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-
 /**
  * AddDialog is the dialog window for adding information to firebase
  * @class
@@ -65,7 +61,7 @@ export default class AddDialog extends Component {
             services[service] = services[service] ? 1 : 0
         });
 
-        fetch(`${ENDPOINT_LINK}${this.state.address}&key=${ak}`)
+        fetch(`http://localhost:8080/?id=1&param=address%3D${this.state.address}`)
             .then(d => {
                 return d.json();
             })
@@ -145,7 +141,7 @@ export default class AddDialog extends Component {
      */
     getReverseGeoLocation = () => {
         this.setState({ reverseLoading: true });
-        let link = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.coords.latitude},${this.state.coords.longitude}&location_type=ROOFTOP&result_type=street_address&key=${ak}`
+        let link = 'http://localhost:8080/?id=2&param=' + encodeURIComponent(`?latlng=${this.state.coords.latitude},${this.state.coords.longitude}&location_type=ROOFTOP&result_type=street_address`);
         fetch(link).then(d => {
             return d.json();
         }).then(d => {
