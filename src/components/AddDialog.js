@@ -20,6 +20,7 @@ import 'firebase/database';
  * AddDialog is the dialog window for adding information to firebase
  * @class
  */
+const ENDPOINT = 'http://localhost:8080';
 export default class AddDialog extends Component {
     constructor(props) {
         super(props);
@@ -61,7 +62,7 @@ export default class AddDialog extends Component {
             services[service] = services[service] ? 1 : 0
         });
 
-        fetch(`http://localhost:8080/?id=1&param=address%3D${this.state.address}`)
+        fetch( ENDPOINT + '/?id=geocode&param=' + encodeURIComponent(`?address=${this.state.address}`))
             .then(d => {
                 return d.json();
             })
@@ -141,7 +142,7 @@ export default class AddDialog extends Component {
      */
     getReverseGeoLocation = () => {
         this.setState({ reverseLoading: true });
-        let link = 'http://localhost:8080/?id=2&param=' + encodeURIComponent(`?latlng=${this.state.coords.latitude},${this.state.coords.longitude}&location_type=ROOFTOP&result_type=street_address`);
+        let link = ENDPOINT +'/?id=geocode&param=' + encodeURIComponent(`?latlng=${this.state.coords.latitude},${this.state.coords.longitude}&location_type=ROOFTOP&result_type=street_address`);
         fetch(link).then(d => {
             return d.json();
         }).then(d => {
