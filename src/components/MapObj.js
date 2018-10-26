@@ -59,7 +59,7 @@ export default class MapObj extends Component {
         this.state.coords && this.state.coords.longitude ? this.state.coords.longitude : 0];
 
         let home = [this.state.coords && this.state.coords.latitude ? this.state.coords.latitude : 0,
-        this.state.coords && this.state.coords.longitude ? this.state.coords.longitude : 0]
+        this.state.coords && this.state.coords.longitude ? this.state.coords.longitude : 0];
 
         let markerList = Object.keys(this.state.data).map((d, i) => {
             let point = this.state.data[d];
