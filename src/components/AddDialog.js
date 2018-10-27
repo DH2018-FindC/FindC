@@ -30,6 +30,8 @@ export default class AddDialog extends Component {
             address: '',
             reverseLoading: false,
             services: {
+                S_condoms: false,
+                S_bcpills: false,
                 F_condoms: false,
                 F_bcpills: false,
                 F_iud: false,
@@ -42,6 +44,8 @@ export default class AddDialog extends Component {
         };
 
         this.servicesList = [
+            { id: 'S_condoms', title: 'Condoms' },
+            { id: 'S_bcpills', title: 'Birth Control Pills' },
             { id: 'F_condoms', title: 'Free Condoms' },
             { id: 'F_bcpills', title: 'Free Birth Control Pills' },
             { id: 'F_iud', title: 'Free IUDs' },

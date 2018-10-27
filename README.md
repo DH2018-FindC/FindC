@@ -65,20 +65,8 @@ This application is far from done. There are many features we have yet to implem
 * Reduce duplicated code
 * Implement more features for accessible contraceptives
 
-# How to run
-
 ## This app will be unable to be run after Dubhacks 2018
 
-This is because it uses API keys that are publically available. These keys will be shut down after Dubhacks 2018. Here are instructions on how to replace the API keys:
+This is because it uses API keys that are publically available. These keys will be shut down after Dubhacks 2018. 
 
-1. In `src/index.js` you must replace the firebase config
-2. In `src/components/SearchDialog.js` and `src/components/AddDialog.js` you must replace the `ak` variable with a Google Cloud API Key that has access to the Geolocation API
-
-## Building and running and deploying
-
-1. Fork the repository
-2. `npm install`
-3. Replace the API keys and firebase config
-4. `npm run build`
-5. `npx gh-pages -d build`
-6. Now it will be available at `http://yourGHusername.github.io/FindC`
+We are currently in the process of writing a server that will allow us to make api calls while keeping our api keys hidden as well as limiting the calls so we can keep this program completely free.
